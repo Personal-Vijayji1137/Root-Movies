@@ -10,7 +10,7 @@ AWS.config.update({
 const s3 = new AWS.S3();
 const BUCKET_NAME = "root-movies-images";
 async function uploadAttachmentToS3(type, buffer) {
-    const currentTime = new Date().toISOString().replace(/[-:.TZ]/g, '');;
+    const currentTime = new Date().toISOString().replace(/[-:.TZ]/g, '');
     const params = {
         Key: `${currentTime}.jpg`,
         Body: buffer,
