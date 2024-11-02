@@ -1,0 +1,114 @@
+.Banner>img {
+    width: 100vw;
+    height: auto;
+    position: fixed;
+    z-index: -1;
+}
+
+.Banner>div {
+    width: 100vw;
+    height: 90dvh;
+    background: linear-gradient(51deg, #000000 10%, hsl(0deg 0% 0% / 98%) 20%, hsl(0deg 0% 0% / 91%) 25%, hsl(0deg 0% 0% / 73%) 35%, hsl(0deg 0% 9% / 88%) 40%, hsl(0deg 0% 9% / 80%) 45%, hsl(0deg 0% 9% / 70%) 50%, hsl(0deg 0% 9% / 39%) 55%, hsla(0, 0%, 9%, 0) 60%, hsla(0, 0%, 9%, 0) 65%, hsl(0deg 0% 9% / 0%) 70%, hsl(0deg 0% 9% / 0%) 75%, hsl(0deg 0% 9% / 0%) 80%, hsla(0, 0%, 9%, 0) 85%, hsla(0, 0%, 9%, 0) 90%, hsla(0, 0%, 9%, 0) 95%, hsla(0, 0%, 9%, 0));}
+
+.BgImageName {
+    padding-top: 10dvh;
+    padding-left: 2vw;
+}
+
+.BgImageName>div>img {
+    width: 400px;
+    height: auto;
+}
+
+.BgImageName>div>div {
+    display: flex;
+    align-items: center;
+}
+
+#AboutMovie>div {
+    font-size: 35px;
+    margin: 30px 0;
+    font-weight: bolder;
+    color: white;
+}
+
+#AboutMovie>span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: white;
+    margin: 0 20px;
+}
+
+.BgImageName>div>p {
+    font-size: 20px;
+    margin: 10px 0;
+    max-width: 500px;
+    color: white;
+}
+
+#Cast>div {
+    font-size: 25px;
+    margin: 30px 0;
+    font-weight: bolder;
+    color: white;
+}
+
+#Cast>span {
+    margin: 0 10px;
+    font-size: 20px;
+    color: white;
+}
+
+.BottonBanner {
+    padding: 2vw;
+}
+
+.BottonBanner>div>a {
+    background-color: rgba(255, 255, 255, 0.389);
+    padding: 10px 30px;
+    border-radius: 3px;
+    color: white;
+    text-decoration: none;
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.Clrousal {
+    background: linear-gradient(149deg, #000000 10%, hsl(0deg 0% 0% / 98%) 20%, hsl(0deg 0% 0% / 91%) 25%, hsl(0deg 0% 0% / 73%) 35%, hsl(0deg 0% 9% / 88%) 40%, hsl(0deg 0% 9% / 80%) 45%, hsl(0deg 0% 9% / 70%) 50%, hsl(0deg 0% 9% / 39%) 55%, hsla(0, 0%, 9%, 0) 60%, hsla(0, 0%, 9%, 0) 65%, hsl(0deg 0% 9% / 0%) 70%, hsl(0deg 0% 9% / 0%) 75%, hsl(0deg 0% 9% / 0%) 80%, hsla(0, 0%, 9%, 0) 85%, hsla(0, 0%, 9%, 0) 90%, hsla(0, 0%, 9%, 0) 95%, hsla(0, 0%, 9%, 0));
+}
+
+.Clrousal>div:first-child {
+    display: flex;
+    width: 100vw;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Clrousal>div:first-child>div {
+    color: white;
+    padding: 0 2vw;
+    font-size: 25px;
+    margin: 20px;
+    font-weight: bolder;
+}
+
+.Clrousal>div:last-child {
+    display: flex;
+    align-items: center;
+    overflow: scroll;
+    width: 100vw;
+    background: linear-gradient(25deg, #000000 10%, hsl(0deg 0% 0% / 98%) 20%, hsl(0deg 0% 0% / 91%) 25%, hsl(0deg 0% 0% / 73%) 35%, hsl(0deg 0% 9% / 88%) 40%, hsl(0deg 0% 9% / 80%) 45%, hsl(0deg 0% 9% / 70%) 50%, hsl(0deg 0% 9% / 39%) 55%, hsla(0, 0%, 9%, 0) 60%, hsla(0, 0%, 9%, 0) 65%, hsl(0deg 0% 9% / 0%) 70%, hsl(0deg 0% 9% / 0%) 75%, hsl(0deg 0% 9% / 0%) 80%, hsla(0, 0%, 9%, 0) 85%, hsla(0, 0%, 9%, 0) 90%, hsla(0, 0%, 9%, 0) 95%, hsla(0, 0%, 9%, 0));
+}
+
+.Clrousal>div:last-child>a {
+    margin: 0 10px;
+}
+
+.Clrousal>div:last-child>a>img {
+    height: auto;
+    width: 200px;
+    border-radius: 5px;
+    object-fit: cover;
+    aspect-ratio: 9/12;
+}
