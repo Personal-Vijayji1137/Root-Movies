@@ -1,9 +1,11 @@
 import { Root_Movies_DB } from "@/app/layout";
 import Styles from "./styles.module.css"
 import ToggleSwitch from "./ToggleSwitch";
+import { unstable_noStore as noStore } from 'next/cache';
 import Link from "next/link";
 import RootGetCustomImagesURL from "@/app/CommonFunctions";
 export default async function ProductTable() {
+  noStore();
   const result = await Root_Movies_DB(`SELECT movie_id, poster_url, title, release_year, type, language FROM movie ORDER BY created_at DESC LIMIT 20 OFFSET 0`);
   return (
     <>

@@ -1,5 +1,6 @@
 "use server"
 import AWS from 'aws-sdk';
+import { unstable_noStore as noStore } from 'next/cache';
 import axios from 'axios';
 const s3 = new AWS.S3({
     accessKeyId: process.env.ROOT_ACCESS_ID,
@@ -7,7 +8,8 @@ const s3 = new AWS.S3({
     region: process.env.ROOT_S3_REGION,
     signatureVersion: "v4",
 });
-export default async function UploadImageToS3(image_url) {    
+export default async function UploadImageToS3(image_url) {  
+    noStore();  
     try {
         const currentTime = new Date().toISOString().replace(/[-:.TZ]/g, '');
         const fileName = `${currentTime}.jpg`

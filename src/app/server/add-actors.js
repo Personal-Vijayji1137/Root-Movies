@@ -1,6 +1,8 @@
 "use server"
 import { Root_Movies_DB } from "@/app/layout";
+import { unstable_noStore as noStore } from 'next/cache';
 export default async function AddActors(formData) {
+  noStore();
     const {name,bio,dob,profile_url	} = formData;
     try {
       const result = await Root_Movies_DB(

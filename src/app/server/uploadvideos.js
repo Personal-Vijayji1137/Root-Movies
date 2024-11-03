@@ -1,6 +1,6 @@
 "use server"
 import AWS from 'aws-sdk';
-import axios from 'axios';
+import { unstable_noStore as noStore } from 'next/cache';
 import { Root_Movies_DB } from '../layout';
 const s3 = new AWS.S3({
     accessKeyId: process.env.ROOT_ACCESS_ID,
@@ -10,6 +10,7 @@ const s3 = new AWS.S3({
 });
 const BUCKET_NAME = "root-movies";
 export default async function UploadVideosToS3(video_url, movie, format, id) {
+    noStore();
     try {
         const fileName = `${movie.split(" ").join("-")}/${format}.mp4`
         const params = {
@@ -23,7 +24,13 @@ export default async function UploadVideosToS3(video_url, movie, format, id) {
             video_url: video_url,
             upload_url: url,
         };
-        await axios.post('https://iplustsolution-uploadmovie.hf.space/upload-movies', postData);
+        await fetch('https://iplustsolution-uploadmovie.hf.space/upload-movies', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(postData),
+        });
         await Root_Movies_DB(
             `INSERT INTO movie_links (movie_id, url, quality) VALUES (?, ?, ?)`,
             [id, fileName, format]

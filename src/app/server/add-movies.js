@@ -1,6 +1,8 @@
 "use server"
 import { Root_Movies_DB } from "@/app/layout";
+import { unstable_noStore as noStore } from 'next/cache';
 export default async function AddMovies(formData) {
+  noStore();
     const {title, description, release_year, duration, type, category, language, ua, poster_url, name_image_url} = formData;
     try {
       await Root_Movies_DB(
@@ -14,6 +16,7 @@ export default async function AddMovies(formData) {
     }
 }
 export async function UpdateMovies(formData, id) {
+  noStore();
     const {title, description, release_year, duration, type, category, language, ua, poster_url, name_image_url} = formData;
     try {
       const result = await Root_Movies_DB(
@@ -29,6 +32,7 @@ export async function UpdateMovies(formData, id) {
 
 
 export async function GetMovie(id) {
+  noStore();
   try {
     const result = await Root_Movies_DB(
       `SELECT * FROM movie WHERE movie_id = ?`,
