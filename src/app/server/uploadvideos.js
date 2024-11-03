@@ -9,7 +9,7 @@ const s3 = new AWS.S3({
     signatureVersion: "v4",
 });
 const BUCKET_NAME = "root-movies";
-export default async function UploadVideosToS3(video_url, movie, format, id) {
+export default async function UploadVideosToS3(movie, format, id) {
     noStore();
     try {
         const fileName = `${movie.split(" ").join("-")}/${format}.mp4`
@@ -20,22 +20,11 @@ export default async function UploadVideosToS3(video_url, movie, format, id) {
             ACL: "bucket-owner-full-control",
         };
         let url = await s3.getSignedUrlPromise("putObject", params);
-        const postData = {
-            video_url: video_url,
-            upload_url: url,
-        }
-        fetch('https://iplustsolution-uploadmovie.hf.space/upload-movies', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(postData),
-        });
         await Root_Movies_DB(
             `INSERT INTO movie_links (movie_id, url, quality) VALUES (?, ?, ?)`,
             [id, fileName, format]
         );
-        return { fileName }
+        return { fileName, url }
     } catch (err) {
         return { type: 'error', err: err };
     }

@@ -136,8 +136,19 @@ export function UploadMovie({ moviename, id, links }) {
         if (url == "Please wait uploading ...") return;
         try {
             setUrl("Please wait uploading ...")
-            const res = await UploadVideosToS3(url, moviename, +videoQuality, id);
-            alert(JSON.stringify(res));
+            const res = await UploadVideosToS3(moviename, +videoQuality, id);
+            const postData = {
+                video_url: url,
+                upload_url: res.url,
+            }
+            setUrl("Url Generated ...");
+            await fetch('https://iplustsolution-uploadmovie.hf.space/upload-movies', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(postData),
+            });
             setUrl(res.fileName);
         } catch (error) {
             console.log(error);
