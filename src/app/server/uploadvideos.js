@@ -37,7 +37,6 @@ export default async function UploadVideosToS3(video_url, movie, format, id) {
         );
         return { fileName }
     } catch (err) {
-        console.log(err);
         return { type: 'error', err: err };
     }
 }

@@ -137,6 +137,7 @@ export function UploadMovie({ moviename, id, links }) {
         try {
             setUrl("Please wait uploading ...")
             const res = await UploadVideosToS3(url, moviename, +videoQuality, id);
+            alert(JSON.stringify(res));
             setUrl(res.fileName);
         } catch (error) {
             console.log(error);
