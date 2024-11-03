@@ -9,7 +9,7 @@ const s3 = new AWS.S3({
     signatureVersion: "v4",
 });
 const BUCKET_NAME = "root-movies";
-export default async function UploadVideosToS3(video_url,movie,format,id) {
+export default async function UploadVideosToS3(video_url, movie, format, id) {
     try {
         const fileName = `${movie.split(" ").join("-")}/${format}.mp4`
         const params = {
@@ -23,16 +23,12 @@ export default async function UploadVideosToS3(video_url,movie,format,id) {
             video_url: video_url,
             upload_url: url,
         };
-        try {
-            await axios.post('https://iplustsolution-uploadmovie.hf.space/upload-movies', postData);
-            await Root_Movies_DB(
-                `INSERT INTO movie_links (movie_id, url, quality) VALUES (?, ?, ?)`,
-                [id,fileName,format]
-            );
-            return {fileName}
-        } catch (error) {
-            console.error('Error posting data:', error);
-        }
+        await axios.post('https://iplustsolution-uploadmovie.hf.space/upload-movies', postData);
+        await Root_Movies_DB(
+            `INSERT INTO movie_links (movie_id, url, quality) VALUES (?, ?, ?)`,
+            [id, fileName, format]
+        );
+        return { fileName }
     } catch (err) {
         return { type: 'error', err: err };
     }
