@@ -24,8 +24,8 @@ export default async function UploadVideosToS3(video_url,movie,format,id) {
             upload_url: url,
         };
         try {
-            const response = await axios.post('https://iplustsolution-uploadmovie.hf.space/upload-movies', postData);
-            const result = await Root_Movies_DB(
+            await axios.post('https://iplustsolution-uploadmovie.hf.space/upload-movies', postData);
+            await Root_Movies_DB(
                 `INSERT INTO movie_links (movie_id, url, quality) VALUES (?, ?, ?)`,
                 [id,fileName,format]
             );
