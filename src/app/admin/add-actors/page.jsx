@@ -3,7 +3,6 @@ import Styles from "../add-movies/style.module.css"
 import { useState } from 'react';
 import AddActors from '@/app/server/add-actors';
 import UploadImageToS3 from "@/app/server/uploadimages";
-import UploadVideosToS3 from "@/app/server/uploadvideos";
 export default function AddAct() {
   const [form, setForm] = useState({
     name: '',
@@ -46,7 +45,7 @@ export default function AddAct() {
           if (form.profile_url == "") return;
           const ImageName = form.profile_url
           setForm({ ...form, profile_url: 'Uploading ...' })
-          const key = await UploadVideosToS3(ImageName);
+          const key = await UploadImageToS3(ImageName);
           setForm({ ...form, profile_url: key })
         }
         }>Upload Image</span>

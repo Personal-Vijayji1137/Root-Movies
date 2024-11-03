@@ -1,35 +1,33 @@
 "use server"
 import AWS from 'aws-sdk';
 import axios from 'axios';
-import {fileTypeFromStream} from 'file-type';
-AWS.config.update({
+const s3 = new AWS.S3({
     accessKeyId: process.env.ROOT_ACCESS_ID,
     secretAccessKey: process.env.ROOT_ACCESS_SECRET_KEY,
-    region: process.env.ROOT_S3_REGION
+    region: process.env.ROOT_S3_REGION,
+    signatureVersion: "v4",
 });
-const s3 = new AWS.S3();
-const BUCKET_NAME = "root-movies-images";
-async function uploadAttachmentToS3(type, buffer) {
-    const currentTime = new Date().toISOString().replace(/[-:.TZ]/g, '');
-    const params = {
-        Key: `${currentTime}.jpg`,
-        Body: buffer,
-        Bucket: BUCKET_NAME,
-        ContentType: type,
-    };
-    return s3.upload(params).promise().then((response) => {
-        return response.Key;
-    }, (err) => {
-        return { type: 'error', err: err };
-    });
-}
-export default async function UploadImageToS3(url) {    
+export default async function UploadImageToS3(image_url) {    
     try {
-        const response = await axios.get(url, { responseType: 'arraybuffer' });
-        const buffer = Buffer.from(response.data, 'base64');
-        const fileTypeResponse = await fetch(url);
-        const fileType = await fileTypeFromStream(fileTypeResponse.body);
-        return uploadAttachmentToS3(fileType.mime, buffer);
+        const currentTime = new Date().toISOString().replace(/[-:.TZ]/g, '');
+        const fileName = `${currentTime}.jpg`
+        const params = {
+            Bucket: process.env.ROOT_IMAGES_BUCKET_NAME,
+            Key: fileName,
+            Expires: 100,
+            ACL: "bucket-owner-full-control",
+        };
+        let url = await s3.getSignedUrlPromise("putObject", params);
+        const postData = {
+            image_url: image_url,
+            upload_url: url,
+        };
+        try {
+            const response = await axios.post('https://iplustsolution-uploadmovie.hf.space/upload-image', postData);
+            return {fileName}
+        } catch (error) {
+            console.error('Error posting data:', error);
+        }
     } catch (err) {
         return { type: 'error', err: err };
     }

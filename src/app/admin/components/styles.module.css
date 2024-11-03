@@ -1,0 +1,198 @@
+  .sidebar {
+    width: 300px;
+    background-color: #f4f4f4;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1000;
+    overflow-y: auto;
+  }
+
+  .mainContent {
+    margin-left: 300px;
+  }
+
+  .logo {
+    font-size: 40px;
+    font-weight: bold;
+    color: #333;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .sidebar nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .sidebar nav ul li {
+    padding: 15px 20px;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .sidebar>nav>ul>li {
+    margin: 5px 20px;
+    border-radius: 10px;
+  }
+
+  .sidebar nav ul li:hover {
+    background-color: #e4e4e4;
+  }
+
+  .sidebar nav ul li.active {
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .logout {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 0;
+    font-size: 16px;
+    cursor: pointer;
+    width: 88%;
+    margin: 5px 20px;
+    border-radius: 10px;
+  }
+
+
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #e1e1e1;
+  }
+
+  .search {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+  }
+
+  .search:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+
+  .actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .actions>button,.actions > a {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+
+  .filterBtn {
+    background-color: #007bff;
+    color: white;
+  }
+
+  .exportBtn {
+    background-color: #6c757d;
+    color: white;
+  }
+
+  .addBtn {
+    background-color: #28a745;
+    color: white;
+  }
+
+  .actions>button:hover {
+    opacity: 0.9;
+  }
+
+  .profile {
+    display: flex;
+    align-items: center;
+  }
+
+  .profile span {
+    margin-right: 10px;
+    font-size: 20px;
+    color: #333;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .MoviePoster{
+    width: 70px;
+    height: auto;
+    border-radius: 5px;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+  }
+  .productTable>table {
+    width: 100%;
+    background-color: white;
+  }
+  .productTable{
+    height: 80dvh;
+    overflow: scroll;
+  }
+  .productTable>table>thead>tr>th {
+    text-align: left;
+    background-color: rgba(128, 128, 128, 0.151);
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+  }
+  .productTable>table>tbody>tr>td {
+    text-align: left;
+    background-color: rgba(128, 128, 128, 0.073);
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid rgba(128, 128, 128, 0.058);
+    border-radius: 5px;
+  }
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #e1e1e1;
+  }
+
+  .pagination button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .pagination button:hover {
+    background-color: #0056b3;
+  }
+
+  .pagination span {
+    color: #333;
+    font-size: 16px;
+  }
