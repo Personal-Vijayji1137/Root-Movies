@@ -6,7 +6,7 @@ import Link from "next/link";
 import RootGetCustomImagesURL from "@/app/CommonFunctions";
 export default async function ProductTable() {
   noStore();
-  const result = await Root_Movies_DB(`SELECT movie_id, poster_url, title, release_year, type, language FROM movie ORDER BY created_at DESC LIMIT 20 OFFSET 0`);
+  const result = await Root_Movies_DB(`SELECT movie_id, poster_url, title, release_year, type, language FROM movie ORDER BY created_at DESC LIMIT 100 OFFSET 0`);
   return (
     <>
       <div className={Styles.productTable}>

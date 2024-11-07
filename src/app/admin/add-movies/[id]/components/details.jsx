@@ -3,7 +3,7 @@ import AddMovies from '@/app/server/add-movies';
 import Styles from "../../style.module.css"
 import { useState } from 'react';
 import UploadImageToS3 from '@/app/server/uploadimages';
-import UploadVideosToS3 from '@/app/server/uploadvideos';
+import UploadVideosToS3, { UploadVideosToS3m3u8 } from '@/app/server/uploadvideos';
 import { contentTypes, movieCategories, movieLanguagesInIndia } from '../../page';
 export default function EditMoviePanel({ data, links }) {
     const [form, setForm] = useState({
@@ -40,31 +40,31 @@ export default function EditMoviePanel({ data, links }) {
                 <div className={Styles.DivContainer}>
                     <div>
                         <label>Title:</label>
-                        <input type="text" name="title" value={form.title} onChange={handleChange} required />
+                        <input type="text" name="title" value={form.title || ''} onChange={handleChange} required />
                     </div>
                     <div>
                         <label>Description:</label>
-                        <textarea name="description" value={form.description} onChange={handleChange} required />
+                        <textarea name="description" value={form.description || ''} onChange={handleChange} required />
                     </div>
                 </div>
                 <div className={Styles.SecondContainer}>
                     <div>
                         <label>Release Year:</label>
-                        <input type="number" name="release_year" value={form.release_year} onChange={handleChange} />
+                        <input type="number" name="release_year" value={form.release_year || ''} onChange={handleChange} />
                     </div>
                     <div>
                         <label>Duration:</label>
-                        <input type="text" name="duration" value={form.duration} onChange={handleChange} />
+                        <input type="text" name="duration" value={form.duration || ''} onChange={handleChange} />
                     </div>
                     <div>
                         <label>UA:</label>
-                        <input type="text" name="ua" value={form.ua} onChange={handleChange} />
+                        <input type="text" name="ua" value={form.ua || ''} onChange={handleChange} />
                     </div>
                 </div>
                 <div className={Styles.SecondContainer}>
                     <div>
                         <label>Type:</label>
-                        <select name="type" value={form.type} onChange={handleChange} required>
+                        <select name="type" value={form.type || ''} onChange={handleChange} required>
                             <option value="">Select Type</option>
                             {contentTypes.map((item, index) => {
                                 return <option value={item} key={index}>{item}</option>
@@ -73,7 +73,7 @@ export default function EditMoviePanel({ data, links }) {
                     </div>
                     <div>
                         <label>Language:</label>
-                        <select name="language" value={form.language} onChange={handleChange} required>
+                        <select name="language" value={form.language || ''} onChange={handleChange} required>
                             <option value="">Select Language</option>
                             {movieLanguagesInIndia.map((item, index) => {
                                 return <option value={item} key={index}>{item}</option>
@@ -82,7 +82,7 @@ export default function EditMoviePanel({ data, links }) {
                     </div>
                     <div>
                         <label>Category:</label>
-                        <select name="category" value={form.category} onChange={handleChange} required>
+                        <select name="category" value={form.category || ''} onChange={handleChange} required>
                             <option value="">Select Type</option>
                             {movieCategories.map((item, index) => {
                                 return <option value={item} key={index}>{item}</option>
@@ -93,7 +93,7 @@ export default function EditMoviePanel({ data, links }) {
                 <div className={Styles.ThirdContainer}>
                     <label>Poster URL:</label>
                     <div>
-                        <input type="text" name="poster_url" value={form.poster_url} onChange={handleChange} />
+                        <input type="text" name="poster_url" value={form.poster_url || ''} onChange={handleChange} />
                         <span onClick={async () => {
                             if (form.profile_url == "") return;
                             const ImageName = form.poster_url
@@ -107,7 +107,7 @@ export default function EditMoviePanel({ data, links }) {
                 <div className={Styles.ThirdContainer}>
                     <label>Name Image URL:</label>
                     <div>
-                        <input type="text" name="name_image_url" value={form.name_image_url} onChange={handleChange} />
+                        <input type="text" name="name_image_url" value={form.name_image_url || ''} onChange={handleChange} />
                         <span onClick={async () => {
                             if (form.name_image_url == "") return;
                             const ImageName = form.name_image_url
@@ -136,23 +136,26 @@ export function UploadMovie({ moviename, id, links }) {
         if (url == "Please wait uploading ...") return;
         try {
             setUrl("Please wait uploading ...")
-            const res = await UploadVideosToS3(moviename, +videoQuality, id);
-            const postData = {
-                video_url: url,
-                upload_url: res.url,
-            }
-            setUrl("Url Generated ...");
-            await fetch('https://iplustsolution-uploadmovie.hf.space/upload-movies', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(postData),
-            });
+            const fileNameWith = `Tere-Ishq-Mein-Ghayal/${moviename.split(" ").join("-")}.mp4`;
+            // const res = await UploadVideosToS3(moviename, +videoQuality, id);
+            const res = await UploadVideosToS3m3u8(fileNameWith, +videoQuality, id,url);
+
+            // const postData = {
+            //     video_url: url,
+            //     upload_url: res.url,
+            // }
+            // setUrl("Url Generated ...");
+            // await fetch('https://iplustsolution-uploadmovie.hf.space/upload-movies', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify(postData),
+            // });
             setUrl(res.fileName);
         } catch (error) {
             console.log(error);
-            alert("An error occurred while uploading the movie.");
+             alert("An error occurred while uploading the movie.");
         }
     };
 
@@ -164,11 +167,11 @@ export function UploadMovie({ moviename, id, links }) {
                     <div>
                         <div>
                             <label>Video URL:</label>
-                            <input type="text" name="title" value={url} onChange={(e) => setUrl(e.target.value)} required />
+                            <input type="text" name="title" value={url || ''} onChange={(e) => setUrl(e.target.value)} required />
                         </div>
                         <div>
                             <label>Video Quality:</label>
-                            <select name="video_quality" value={videoQuality} onChange={(e) => setVideoQuality(e.target.value)} required>
+                            <select name="video_quality" value={videoQuality || ''} onChange={(e) => setVideoQuality(e.target.value)} required>
                                 <option value="">Select Video Quality</option>
                                 <option value="480">480p</option>
                                 <option value="720">720p</option>
@@ -184,7 +187,7 @@ export function UploadMovie({ moviename, id, links }) {
                         {links.map((item, index) => {
                             return <div key={index}>
                                 <label>Video Quality : {item.quality}p</label>
-                                <input value={item?.url || ""} readOnly />
+                                <input value={item?.url || ''} readOnly />
                             </div>
                         })}
                     </div>

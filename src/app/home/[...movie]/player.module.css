@@ -1,0 +1,32 @@
+.VideoPlayer {
+    width: 100vw;
+    height: 100dvh;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .VideoPlayer > video {
+    width: 100vw;
+    height: 100dvh;
+    border: none;
+  }
+  .Quality{
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 10px;
+    padding: 10px;
+    z-index: 10;
+    border-radius: 5px;
+  }
+  .Quality > div{
+    color: white;
+    font-size: 25px;
+    font-weight: bolder;
+    cursor: pointer;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+  }

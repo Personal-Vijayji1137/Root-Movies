@@ -18,6 +18,7 @@
 .BgImageName>div>img {
     width: 400px;
     height: auto;
+    min-height: 150px;
 }
 
 .BgImageName>div>div {
@@ -107,8 +108,8 @@
 
 .Clrousal>div:last-child>a>img {
     height: auto;
-    width: 200px;
+    width: 300px;
     border-radius: 5px;
     object-fit: cover;
-    aspect-ratio: 9/12;
+    aspect-ratio: 16/9;
 }

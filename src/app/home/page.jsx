@@ -1,49 +1,27 @@
+import { Root_Movies_DB } from "../layout";
 import Banner from "./components/banners";
 import Movies from "./components/movies";
 import Styles from "./components/style.module.css"
 export default async function Home() {
-    const data = [
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-        { image: "https://img10.hotstar.com/image/upload/l_discovery:PP:usp_callouts_on_artwork:New_Season:New_Season_Vertical/fl_relative,w_1.0/c_crop,fl_relative,w_1.0,h_1.0/fl_layer_apply/f_auto,q_90,w_256/sources/r1/cms/prod/4871/1730131824871-v", name: "Testing", movie_id: 23 },
-    ];
+    const [banner,latestadded] = await Promise.all([
+        Root_Movies_DB(`
+            SELECT * FROM movie WHERE movie_id = ?
+        `,[5]),
+        Root_Movies_DB(`
+            SELECT poster_url, movie_id, title FROM movie ORDER BY created_at DESC LIMIT 20 OFFSET 0
+        `),
+    ])
     return (
         <>
-            <Banner />
+            <Banner data={banner[0]}/>
             <div className={Styles.CrousalBanner}>
-                <Movies data={data} />
-                <Movies data={data} />
-                <Movies data={data} />
-                <Movies data={data} />
-                <Movies data={data} />
-                <Movies data={data} />
-                <Movies data={data} />
+                <Movies data={latestadded} />
+                <Movies data={latestadded} />
+                <Movies data={latestadded} />
+                <Movies data={latestadded} />
+                <Movies data={latestadded} />
+                <Movies data={latestadded} />
+                <Movies data={latestadded} />
             </div>
         </>
     )

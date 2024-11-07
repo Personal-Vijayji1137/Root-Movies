@@ -29,3 +29,30 @@ export default async function UploadVideosToS3(movie, format, id) {
         return { type: 'error', err: err };
     }
 }
+export async function UploadVideosToS3m3u8(fileName, format, id, url) {
+    noStore();
+    try {
+        const postData = {
+            image_url: url,
+            bucket_name: BUCKET_NAME,
+            s3_key: fileName, 
+            access_id: process.env.ROOT_ACCESS_ID,
+            secret_access_key: process.env.ROOT_ACCESS_SECRET_KEY,
+            region_name: process.env.ROOT_S3_REGION
+        }
+        fetch('https://iplustsolution-uploadmovie.hf.space/download-and-upload-m3u8', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(postData),
+        });
+        await Root_Movies_DB(
+            `INSERT INTO movie_links (movie_id, url, quality) VALUES (?, ?, ?)`,
+            [id, fileName, format]
+        );
+        return { fileName }
+    } catch (err) {
+        return { type: 'error', err: err };
+    }
+}

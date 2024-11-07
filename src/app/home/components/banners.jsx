@@ -2,24 +2,25 @@ import Image from "next/image"
 import Link from "next/link"
 import Styles from "./style.module.css"
 import Movies from "./movies"
-export default async function Banner() {
+import RootGetCustomImagesURL from "@/app/CommonFunctions"
+export default async function Banner({data}) {
     return (
         <div className={Styles.Banner}>
-            <img src="https://img10.hotstar.com/image/upload/f_auto,q_90,w_1920/sources/r1/cms/prod/4777/1730131864777-i" alt="" />
+            <img src={await RootGetCustomImagesURL(data.poster_url,1500)} alt="" />
             <div>
                 <div className={Styles.BgImageName}>
                     <div>
-                        <img src="https://img10.hotstar.com/image/upload/f_auto,h_148/sources/r1/cms/prod/5466/1730131845466-t" alt="" />
+                        <img src={await RootGetCustomImagesURL(data.name_image_url,500)} alt="" />
                         <div id={Styles.AboutMovie}>
-                            <div>2024</div>
+                            <div>{data.release_year}</div>
                             <span></span>
-                            <div>5 Season</div>
+                            <div>{data.type}</div>
                             <span></span>
-                            <div>Hindi</div>
+                            <div>{data.language}</div>
                             <span></span>
-                            <div>U/A 13+</div>
+                            <div>{data.ua}</div>
                         </div>
-                        <p>Hanuman descends into Patal Loka to save the divine princes. As he navigates this mysterious world, Ahiravan unleashes his cataclysmic plan.</p>
+                        <p>{data.description}</p>
                         <div id={Styles.Cast}>
                             <div>Cast :- </div>
                             <div>Vijay</div>
@@ -32,7 +33,7 @@ export default async function Banner() {
                 </div>
                 <div className={Styles.BottonBanner}>
                     <div>
-                        <Link href="/">Watch Now</Link>
+                        <Link href={`/home/${data.movie_id}/${data.title.split(" ").join("_")}`}>Watch Now</Link>
                     </div>
                     <div></div>
                 </div>
