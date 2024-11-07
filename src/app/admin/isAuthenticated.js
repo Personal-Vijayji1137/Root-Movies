@@ -35,7 +35,7 @@ export async function isAdminAuthanticatedAuthenticated(request) {
     }
     const token = authHeader?.split(' ')[1] || cookieToken;
     try {
-        const payload = await verifyJwt(token, 'my_secret_key');
+        const payload = await verifyJwt(token, 'mysjhcbhsdfjhsDFJhakgdsvbxk_secret_key');
         return !!payload;
     } catch (error) {
         return false;
