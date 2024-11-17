@@ -2,6 +2,7 @@
 import { Root_Movies_DB } from "@/app/layout";
 import EditMoviePanel from "./components/details";
 import { unstable_noStore as noStore } from 'next/cache';
+import RootGetCustomImagesURL from "@/app/CommonFunctions";
 export default async function AddAct({ params }) {
   noStore();
   const {id} = await params;
@@ -18,7 +19,8 @@ export default async function AddAct({ params }) {
   if (result.length == 0) {
     return <></>
   }
+  const image_url = await RootGetCustomImagesURL(result[0].poster_url, 200);
   return (
-    <EditMoviePanel data={result[0]} links={links}/>
+    <EditMoviePanel image_url={image_url} data={result[0]} movie_id={id} links={links}/>
   );
 }

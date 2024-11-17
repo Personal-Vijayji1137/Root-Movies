@@ -1,21 +1,20 @@
 "use client"
+import { toggleSwitch } from '@/app/CommonFunctions';
 import { useState } from 'react';
 
-const ToggleSwitch = () => {
-  const [isEnabled, setIsEnabled] = useState(false);
-
-  const toggleSwitch = () => setIsEnabled((prev) => !prev);
+const ToggleSwitch = ({data}) => {
+  const [isEnabled, setIsEnabled] = useState(data.is_published);
 
   return (
-      <div style={styles.switch} onClick={toggleSwitch}>
-        <div
-          style={{
-            ...styles.toggle,
-            backgroundColor: isEnabled ? '#4CAF50' : '#ff000069',
-            transform: isEnabled ? 'translateX(33px)' : 'translateX(0)',
-          }}
-        />
-      </div>
+    <div style={styles.switch} onClick={()=>{setIsEnabled(pre => setIsEnabled(!isEnabled));toggleSwitch(!isEnabled,data.movie_id)}}>
+      <div
+        style={{
+          ...styles.toggle,
+          backgroundColor: isEnabled ? '#4CAF50' : '#ff000069',
+          transform: isEnabled ? 'translateX(33px)' : 'translateX(0)',
+        }}
+      />
+    </div>
   );
 };
 

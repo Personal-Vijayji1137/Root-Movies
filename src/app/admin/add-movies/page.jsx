@@ -136,7 +136,18 @@ export default function AdminPanel() {
       const data = await AddMovies(form);
       if(data.success){
         setload(false);
-        setForm({ title: '', duration: '' });
+        setForm({
+          title: '',
+          description: '',
+          release_year: '',
+          duration: '',
+          type: '',
+          category: '',
+          language: '',
+          ua: 'U/A ',
+          poster_url: '',
+          name_image_url: '',
+        });
       }
       else{
         setload(false);

@@ -1,11 +1,11 @@
 "use client"
-import AddMovies from '@/app/server/add-movies';
+import AddMovies, { UpdateMovies } from '@/app/server/add-movies';
 import Styles from "../../style.module.css"
 import { useState } from 'react';
 import UploadImageToS3 from '@/app/server/uploadimages';
 import UploadVideosToS3, { UploadVideosToS3m3u8 } from '@/app/server/uploadvideos';
 import { contentTypes, movieCategories, movieLanguagesInIndia } from '../../page';
-export default function EditMoviePanel({ data, links }) {
+export default function EditMoviePanel({image_url, data, movie_id, links }) {
     const [form, setForm] = useState({
         title: data.title,
         description: data.description,
@@ -13,6 +13,7 @@ export default function EditMoviePanel({ data, links }) {
         duration: data.duration,
         type: data.type,
         language: data.language,
+        category: data.category,
         ua: data.ua,
         poster_url: data.poster_url,
         name_image_url: data.name_image_url,
@@ -25,8 +26,8 @@ export default function EditMoviePanel({ data, links }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const data = await AddMovies(form);
-            setForm({ title: '', description: '', release_year: '', duration: '', type: '', language: '', ua: '', poster_url: '', name_image_url: '' });
+            await UpdateMovies(form,movie_id);
+            alert('Done ...')
         } catch (error) {
             console.error(error);
             alert('Error adding movie');
@@ -35,7 +36,10 @@ export default function EditMoviePanel({ data, links }) {
 
     return (
         <div className={Styles.container}>
-            <h1>Update Movie</h1>
+            <div className={Styles.MoviePoster} >
+                <h1>{form.title}</h1>
+                <img src={image_url} alt="Profile"/>
+            </div>
             <form onSubmit={handleSubmit}>
                 <div className={Styles.DivContainer}>
                     <div>
@@ -118,7 +122,7 @@ export default function EditMoviePanel({ data, links }) {
                         }>Upload Image</span>
                     </div>
                 </div>
-                <button type="submit">Add Movie</button>
+                <button type="submit">Update Movie</button>
             </form>
             <UploadMovie moviename={data.title} id={data.movie_id} links={links} />
         </div>
@@ -137,21 +141,20 @@ export function UploadMovie({ moviename, id, links }) {
         try {
             setUrl("Please wait uploading ...")
             const fileNameWith = `Tere-Ishq-Mein-Ghayal/${moviename.split(" ").join("-")}.mp4`;
-            // const res = await UploadVideosToS3(moviename, +videoQuality, id);
-            const res = await UploadVideosToS3m3u8(fileNameWith, +videoQuality, id,url);
-
-            // const postData = {
-            //     video_url: url,
-            //     upload_url: res.url,
-            // }
-            // setUrl("Url Generated ...");
-            // await fetch('https://iplustsolution-uploadmovie.hf.space/upload-movies', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify(postData),
-            // });
+            const res = await UploadVideosToS3(moviename, +videoQuality, id);
+            // const res = await UploadVideosToS3m3u8(fileNameWith, +videoQuality, id,url);
+            const postData = {
+                video_url: url,
+                upload_url: res.url,
+            }
+            setUrl("Url Generated ...");
+            await fetch('https://iplustsolution-uploadmovie.hf.space/upload-movies', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(postData),
+            });
             setUrl(res.fileName);
         } catch (error) {
             console.log(error);

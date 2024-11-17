@@ -34,3 +34,20 @@ export default async function UploadImageToS3(image_url) {
         return { type: 'error', err: err };
     }
 }
+export async function generatePresignedUrl() {  
+    noStore();  
+    try {
+        const currentTime = new Date().toISOString().replace(/[-:.TZ]/g, '');
+        const fileName = `${currentTime}.jpg`
+        const params = {
+            Bucket: process.env.ROOT_IMAGES_BUCKET_NAME,
+            Key: fileName,
+            Expires: 100,
+            ACL: "bucket-owner-full-control"
+        };
+        let url = await s3.getSignedUrlPromise("putObject", params);
+        return {url,fileName}
+    } catch (err) {
+        return false;
+    }
+}

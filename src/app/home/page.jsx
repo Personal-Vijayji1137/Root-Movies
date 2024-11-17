@@ -8,7 +8,7 @@ export default async function Home() {
             SELECT * FROM movie WHERE movie_id = ?
         `,[5]),
         Root_Movies_DB(`
-            SELECT poster_url, movie_id, title FROM movie ORDER BY created_at DESC LIMIT 20 OFFSET 0
+            SELECT poster_url, movie_id, title FROM movie WHERE is_published = true ORDER BY created_at DESC LIMIT 20 OFFSET 0
         `),
     ])
     return (

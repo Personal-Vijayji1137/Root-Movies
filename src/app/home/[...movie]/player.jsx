@@ -30,6 +30,26 @@ export default function VideoPlayer({ videoSources, name }) {
               roll: 'preRoll',
               vastTag: 'https://vast.yomeno.xyz/vast?spot_id=1423324',
             },
+            {
+              roll: 'preRoll',
+              vastTag: 'https://www.videosprofitnetwork.com/watch.xml?key=33fbd0c79b9cef3124da277df46f4db0',
+            },
+            {
+              roll: 'preRoll',
+              vastTag: 'https://vast.yomeno.xyz/vast?spot_id=1424057',
+            },
+            {
+              roll: 'preRoll',
+              vastTag: 'https://vast.yomeno.xyz/vast?spot_id=1424058',
+            },
+            {
+              roll: 'preRoll',
+              vastTag: 'https://vast.yomeno.xyz/vast?spot_id=1424059',
+            },
+            {
+              roll: 'preRoll',
+              vastTag: 'https://vast.yomeno.xyz/vast?spot_id=1424061',
+            },
           ],
         },
       });

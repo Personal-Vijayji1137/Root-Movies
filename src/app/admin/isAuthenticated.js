@@ -29,13 +29,13 @@ async function verifyJwt(token, secretKey) {
 }
 export async function isAdminAuthanticatedAuthenticated(request) {
     const authHeader = request.headers.get('Authorization');
-    const cookieToken = request.cookies.get('RootUserToken')?.value;
+    const cookieToken = request.cookies.get('AdminSideRootUserToken')?.value;
     if ((!authHeader || !authHeader.startsWith('Bearer ')) && !cookieToken) {
         return false;
     }
     const token = authHeader?.split(' ')[1] || cookieToken;
     try {
-        const payload = await verifyJwt(token, 'mysjhcbhsdfjhsDFJhakgdsvbxk_secret_key');
+        const payload = await verifyJwt(token, process.env.ROOT_SECRET_KEY_FOR_TOKEN_ADMIN);
         return !!payload;
     } catch (error) {
         return false;

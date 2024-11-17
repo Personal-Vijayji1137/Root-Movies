@@ -35,7 +35,7 @@ export async function isAuthenticated(request) {
     }
     const token = authHeader?.split(' ')[1] || cookieToken;
     try {
-        const payload = await verifyJwt(token, 'my_secret_key');
+        const payload = await verifyJwt(token, process.env.ROOT_SECRET_KEY_FOR_TOKEN_USES);
         return !!payload;
     } catch (error) {
         return false;
